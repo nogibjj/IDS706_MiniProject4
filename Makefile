@@ -3,9 +3,9 @@ setup:
 	pip install -r requirements.txt
 
 test:
-	pytest
+	/usr/bin/python3.8 -m pytest
 
 lint:
-	flake8
+	/usr/bin/python3.8 -m flake8
 
 .PHONY: setup test lint
