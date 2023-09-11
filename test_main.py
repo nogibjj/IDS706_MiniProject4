@@ -6,10 +6,12 @@ def test_func_positive():
     template = 8
     assert result == template
 
+
 def test_func_negative():
     result = add(-2, -3)
     template = -5
     assert result == template
+
 
 def test_func_pos_neg():
     result = add(1, -3)
