@@ -10,3 +10,4 @@ if __name__ == "__main__":
     test_func(3, 4)
     test_func(-2, -3)
     print("All test passed")
+    
