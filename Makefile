@@ -1,11 +1,17 @@
-# Makefile
-setup:
-	pip install -r requirements.txt
+install:
+	pip install --upgrade pip &&\
+		pip install -r requirements.txt
 
 test:
-	/usr/bin/python3.8 -m pytest
+	python -m pytest -vv --cov=main 
+
+format:	
+	black *.py 
 
 lint:
-	/usr/bin/python3.8 -m flake8
+	pylint --disable=R,C --ignore-patterns=test_.*?py *.py
 
-.PHONY: setup test lint
+deploy:
+	# Deploy code goes here
+		
+all: install lint format test 
