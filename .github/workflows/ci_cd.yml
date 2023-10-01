@@ -1,20 +1,28 @@
-# .github/workflows/ci_cd.yml
-name: Python CI/CD
-
-on: [push, pull_request]
+name: CI
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7, 3.8, 3.9]
+        os : [ubuntu-latest] 
+    runs-on: ${{ matrix.os }}
+    
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.8'
-    - name: Install Dependencies
-      run: pip install -r requirements.txt
-    - name: Lint with flake8
-      run: flake8 .
-    - name: Test with pytest
-      run: pytest
+      - uses: actions/checkout@v3
+      - name: install packages
+        run: make install
+      - name: lint
+        run: make lint
+      - name: test
+        run: make test
+      - name: format
+        run: make format
+      - name: deploy
+        run: make deploy
